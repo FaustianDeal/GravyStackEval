@@ -22,6 +22,7 @@ using UnityEngine.UI;
     public enum Staging // Where a character will appear in the scene
     {
         ForegroundLeft,
+        ForegroundLeft2,
         ForegroundCenter,
         ForegroundRight,
         BackgroundLeft,
@@ -272,6 +273,7 @@ public class CharacterPanel : MonoBehaviour
                 if (SpawnedCharacters[i].myCharacterType == whichCharacter)
                 {
                     SpawnedCharacters[i].GetComponent<Transform>().SetParent(characterPanelTransform);
+                    SpawnedCharacters[i].GetComponent<Transform>().localPosition = Vector3.zero;
                     // Make the character smaller if they're in the background
                     RectTransform characterTransform = SpawnedCharacters[i].GetComponent<RectTransform>();
                     if (where == Staging.BackgroundCenter || where == Staging.BackgroundLeft || where == Staging.BackgroundRight)

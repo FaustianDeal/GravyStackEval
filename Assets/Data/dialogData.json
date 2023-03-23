@@ -69,7 +69,7 @@
     {
       "speaker": "GreenGecko",
       "pose": "Pose3",
-      "stage": "ForegroundLeft",
+      "stage": "ForegroundLeft2",
       "text1": "Nah, I say let's use it to head to the surf shop..",
       "text2": "",
       "moveNext": "BackgroundLeft",
