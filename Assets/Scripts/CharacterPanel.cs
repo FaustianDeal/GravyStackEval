@@ -31,10 +31,14 @@ using UnityEngine.UI;
 public class CharacterPanel : MonoBehaviour
 {
     public GameObject characterPrefab; // The character prefab that you want to place
-    
+    public DialogReader dialogReader;
     public float backgroundStagingScale = .75f;
     private Dictionary<Staging, Transform> characterPanelTransforms;
     private List<Character> SpawnedCharacters;
+    private int dialogProgressCounter = -1;
+    private CharacterType[] allCharacterTypes;
+    private Pose[] allPoses;
+    private Staging[] allStages;
     
     void Start()
     {
@@ -42,6 +46,9 @@ public class CharacterPanel : MonoBehaviour
         SpawnedCharacters = new List<Character>();
         List<Transform> characterForegroundPositions = new List<Transform>();
         List<Transform> characterBackgroundPositions = new List<Transform>();
+        allCharacterTypes = (CharacterType[])Enum.GetValues(typeof(CharacterType));
+        allPoses = (Pose[])Enum.GetValues(typeof(Pose));
+        allStages = (Staging[])Enum.GetValues(typeof(Staging));
         
         // Loop through the children of this object and add any transforms that have the "Foreground" or "Background" tag
         for (int i = 0; i < this.transform.childCount; i++)
@@ -58,23 +65,81 @@ public class CharacterPanel : MonoBehaviour
         }
         
         // Loop through the Staging enum values and the characterPositions arrays
-        Staging[] stagings = (Staging[])Enum.GetValues(typeof(Staging));
-        for (int i = 0; i < stagings.Length; i++)
+        //Staging[] stagings = (Staging[])Enum.GetValues(typeof(Staging));
+        for (int i = 0; i < allStages.Length; i++)
         {
             Transform tfm = null;
     
-            if (i < characterForegroundPositions.Count && stagings[i] >= Staging.ForegroundLeft && stagings[i] <= Staging.ForegroundRight)
+            if (i < characterForegroundPositions.Count && allStages[i] >= Staging.ForegroundLeft && allStages[i] <= Staging.ForegroundRight)
             {
                 tfm = characterForegroundPositions[i];
             }
-            else if (i < characterForegroundPositions.Count + characterBackgroundPositions.Count && stagings[i] >= Staging.BackgroundLeft && stagings[i] <= Staging.BackgroundRight)
+            else if (i < characterForegroundPositions.Count + characterBackgroundPositions.Count && allStages[i] >= Staging.BackgroundLeft && allStages[i] <= Staging.BackgroundRight)
             {
                 tfm = characterBackgroundPositions[i - characterForegroundPositions.Count];
             }
 
-            characterPanelTransforms.Add(stagings[i], tfm);
+            characterPanelTransforms.Add(allStages[i], tfm);
         }
-        DoCharacterDialog(CharacterType.GreenGecko, Pose.Pose1, Staging.ForegroundCenter, true, "Testing Part 1", "Testing Part 2");
+        AdvanceTheDialog();
+        //DoCharacterDialog(CharacterType.GreenGecko, Pose.Pose1, Staging.ForegroundCenter, true, "Testing Part 1", "Testing Part 2");
+    }
+    
+    private void OnClick()
+    {
+        AdvanceTheDialog();
+    }
+
+    private void OnEnable()
+    {
+        TouchOrClickHandler.OnClickEvent += OnClick;
+    }
+
+    private void OnDisable()
+    {
+        TouchOrClickHandler.OnClickEvent -= OnClick;
+    }
+
+    private void AdvanceTheDialog()
+    {
+        dialogProgressCounter++;
+        CharacterType speaker = 0;
+        Pose speakingPose = 0;
+        Staging speakerStage = 0;
+        bool multiPartSpeech = false;
+        string text1 = dialogReader.dialogData.dialog[dialogProgressCounter].text1;
+        string text2 = dialogReader.dialogData.dialog[dialogProgressCounter].text2;
+       
+        foreach (CharacterType value in allCharacterTypes)
+        {
+            if (value.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].speaker)
+            {
+                speaker = value;
+            }
+        }
+
+        foreach (Pose aPose in allPoses)
+        {
+            if (aPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].pose)
+            {
+                speakingPose = aPose;
+            }
+        }
+
+        foreach (Staging aStage in allStages)
+        {
+            if (aStage.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].stage)
+            {
+                speakerStage = aStage;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(text2))
+        {
+            multiPartSpeech = true;
+        }
+        
+        DoCharacterDialog(speaker,speakingPose,speakerStage,multiPartSpeech,text1,text2);
     }
     
     /// <summary>

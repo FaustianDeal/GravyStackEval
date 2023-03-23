@@ -4,27 +4,28 @@ using System.IO;
 public class DialogReader : MonoBehaviour
 {
     [SerializeField] private TextAsset dialogJsonFile;
+    [HideInInspector] public Dialog dialogData;
 
     [System.Serializable]
-    private class DialogLine
+    public class DialogLine
     {
         public string speaker;
-        public string text;
+        public string pose;
+        public string stage;
+        public string text1;
+        public string text2;
+        public string moveNext;
+        public string poseNext;
     }
 
     [System.Serializable]
-    private class Dialog
+    public class Dialog
     {
         public DialogLine[] dialog;
     }
 
     private void Start()
     {
-        Dialog dialogData = JsonUtility.FromJson<Dialog>(dialogJsonFile.text);
-
-        foreach (DialogLine dialogLine in dialogData.dialog)
-        {
-            Debug.Log(dialogLine.speaker + ": " + dialogLine.text);
-        }
+        dialogData = JsonUtility.FromJson<Dialog>(dialogJsonFile.text);
     }
 }

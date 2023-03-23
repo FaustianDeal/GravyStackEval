@@ -2,35 +2,75 @@
   "dialog": [
     {
       "speaker": "Purple Penguin",
-      "text": "Hmm... My friends said they'd be here. Did they leave without me?"
+      "pose": "Pose1",
+      "stage": "ForegroundRight",
+      "text1": "Hmm...",
+      "text2": "My friends said they'd be here. Did they leave without me?",
+      "moveNext": "BackgroundRight",
+      "poseNext": "Pose2"
     },
     {
       "speaker": "Green Gecko",
-      "text": "Surprise! I was hiding in the sand hehe.."
+      "pose": "Pose1",
+      "stage": "ForegroundLeft",
+      "text1": "Surprise! I was hiding in the sand hehe..",
+      "text2": "",
+      "moveNext": "BackgroundLeft",
+      "poseNext": ""
     },
     {
       "speaker": "Purple Penguin",
-      "text": "Nice try buddy.. I've got nerves of steel."
+      "pose": "Pose2",
+      "stage": "ForegroundRight",
+      "text1": "Nice try buddy.. I've got nerves of steel.",
+      "text2": "",
+      "moveNext": "BackgroundRight",
+      "poseNext": ""
     },
     {
       "speaker": "Green Gecko",
-      "text": "You're no fun.. Btw, where's Bear? Wasn't she coming with you?"
+      "pose": "Pose2",
+      "stage": "ForegroundLeft",
+      "text1": "You're no fun.. Btw, where's Bear? Wasn't she coming with you?",
+      "text2": "",
+      "moveNext": "BackgroundLeft",
+      "poseNext": ""
     },
     {
       "speaker": "Bronze Bear",
-      "text": "NO WAY! THIS NEW APP ALLOWS YOU TO TELEPORT ANYWHERE YOU WANT!"
+      "pose": "",
+      "stage": "ForegroundCenter",
+      "text1": "NO WAY! THIS NEW APP ALLOWS YOU TO TELEPORT ANYWHERE YOU WANT!",
+      "text2": "",
+      "moveNext": "",
+      "poseNext": ""
     },
     {
       "speaker": "Purple Penguin",
-      "text": "LET'S USE IT TO GO TO THE MALL!"
+      "pose": "",
+      "stage": "",
+      "text1": "LET'S USE IT TO GO TO THE MALL!",
+      "text2": "",
+      "moveNext": "",
+      "poseNext": ""
     },
     {
       "speaker": "Green Gecko",
-      "text": "Nah, I say let's use it to head to the surf shop.."
+      "pose": "",
+      "stage": "",
+      "text1": "Nah, I say let's use it to head to the surf shop..",
+      "text2": "",
+      "moveNext": "",
+      "poseNext": ""
     },
     {
       "speaker": "Bronze Bear",
-      "text": "How about we enjoy our time here at the beach."
+      "pose": "",
+      "stage": "",
+      "text1": "How about we enjoy our time here at the beach.",
+      "text2": "",
+      "moveNext": "",
+      "poseNext": ""
     }
   ]
 }
