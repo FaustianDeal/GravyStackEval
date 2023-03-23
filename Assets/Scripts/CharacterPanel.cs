@@ -141,6 +141,7 @@ public class CharacterPanel : MonoBehaviour
 
             if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose))
             {
+                Debug.Log("Also pose: "+ dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose);
                 for (int i = 0; i < SpawnedCharacters.Count; i++)
                 {
                     if (SpawnedCharacters[i].myCharacterType.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose)

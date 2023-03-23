@@ -52,6 +52,8 @@ public class Character : MonoBehaviour
             if (CharacterSprites[i].name.Contains(newPose.ToString()))
             {
                 currentImage.sprite = CharacterSprites[i];
+                currentImage.SetNativeSize();
+                //currentImage.rectTransform.sizeDelta = new Vector2(width, height);
             }
         }
     }

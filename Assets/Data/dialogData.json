@@ -52,8 +52,8 @@
       "text2": "",
       "moveNext": "BackgroundCenter",
       "poseNext": "Pose2",
-      "alsoPose": "",
-      "otherPose": ""
+      "alsoPose": "GreenGecko",
+      "otherPose": "Pose1"
     },
     {
       "speaker": "PurplePenguin",
@@ -63,8 +63,8 @@
       "text2": "",
       "moveNext": "BackgroundRight",
       "poseNext": "Pose2",
-      "alsoPose": "GreenGecko",
-      "otherPose": "Pose2"
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
       "speaker": "GreenGecko",
