@@ -39,6 +39,7 @@ public class CharacterPanel : MonoBehaviour
     private CharacterType[] allCharacterTypes;
     private Pose[] allPoses;
     private Staging[] allStages;
+    private CharacterType lastActiveCharacter;
     
     void Start()
     {
@@ -81,7 +82,6 @@ public class CharacterPanel : MonoBehaviour
 
             characterPanelTransforms.Add(allStages[i], tfm);
         }
-        AdvanceTheDialog();
         //DoCharacterDialog(CharacterType.GreenGecko, Pose.Pose1, Staging.ForegroundCenter, true, "Testing Part 1", "Testing Part 2");
     }
     
@@ -102,6 +102,60 @@ public class CharacterPanel : MonoBehaviour
 
     private void AdvanceTheDialog()
     {
+        if (dialogProgressCounter > -1)
+        {
+            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].moveNext))
+            {
+                if ((int)lastActiveCharacter > -1)
+                {
+                    foreach (Staging aStage in allStages)
+                    {
+                        if (aStage.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].moveNext)
+                        {
+                            MoveCharacter(lastActiveCharacter,
+                                aStage);
+                        }
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].poseNext))
+            {
+                if ((int)lastActiveCharacter > -1)
+                {
+                    foreach (Pose nextPose in allPoses)
+                    {
+                        if (nextPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].poseNext)
+                        {
+                            for (int i = 0; i < SpawnedCharacters.Count; i++)
+                            {
+                                if (SpawnedCharacters[i].myCharacterType == lastActiveCharacter)
+                                {
+                                    SpawnedCharacters[i].SetPose(nextPose);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose))
+            {
+                for (int i = 0; i < SpawnedCharacters.Count; i++)
+                {
+                    if (SpawnedCharacters[i].myCharacterType.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose)
+                    {
+                        foreach (Pose nextPose in allPoses)
+                        {
+                            if (nextPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].otherPose)
+                            {
+                                SpawnedCharacters[i].SetPose(nextPose);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         dialogProgressCounter++;
         CharacterType speaker = 0;
         Pose speakingPose = 0;
@@ -140,6 +194,7 @@ public class CharacterPanel : MonoBehaviour
         }
         
         DoCharacterDialog(speaker,speakingPose,speakerStage,multiPartSpeech,text1,text2);
+        lastActiveCharacter = speaker;
     }
     
     /// <summary>

@@ -33,13 +33,7 @@ public class Character : MonoBehaviour
     }
     public void DoCharacterDialog(Pose whatPose, Staging staging, bool hasTwoParts, string dialog1, string dialog2 = null)
     {
-        for (int i = 0; i < CharacterSprites.Count; i++)
-        {
-            if (CharacterSprites[i].name.Contains(whatPose.ToString()))
-            {
-                currentImage.sprite = CharacterSprites[i];
-            }
-        }
+        SetPose(whatPose);
         
         CurrentStaging = staging;
         myDialog.gameObject.SetActive(true);
@@ -49,5 +43,16 @@ public class Character : MonoBehaviour
     public void DisableDialog()
     {
         myDialog.gameObject.SetActive(false);
+    }
+
+    public void SetPose(Pose newPose)
+    {
+        for (int i = 0; i < CharacterSprites.Count; i++)
+        {
+            if (CharacterSprites[i].name.Contains(newPose.ToString()))
+            {
+                currentImage.sprite = CharacterSprites[i];
+            }
+        }
     }
 }

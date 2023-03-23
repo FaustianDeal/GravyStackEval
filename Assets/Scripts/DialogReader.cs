@@ -16,6 +16,8 @@ public class DialogReader : MonoBehaviour
         public string text2;
         public string moveNext;
         public string poseNext;
+        public string alsoPose;
+        public string otherPose;
     }
 
     [System.Serializable]

@@ -1,76 +1,92 @@
 {
   "dialog": [
     {
-      "speaker": "Purple Penguin",
+      "speaker": "PurplePenguin",
       "pose": "Pose1",
       "stage": "ForegroundRight",
       "text1": "Hmm...",
       "text2": "My friends said they'd be here. Did they leave without me?",
       "moveNext": "BackgroundRight",
-      "poseNext": "Pose2"
+      "poseNext": "Pose2",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Green Gecko",
+      "speaker": "GreenGecko",
       "pose": "Pose1",
       "stage": "ForegroundLeft",
       "text1": "Surprise! I was hiding in the sand hehe..",
       "text2": "",
       "moveNext": "BackgroundLeft",
-      "poseNext": ""
+      "poseNext": "",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Purple Penguin",
+      "speaker": "PurplePenguin",
       "pose": "Pose2",
       "stage": "ForegroundRight",
       "text1": "Nice try buddy.. I've got nerves of steel.",
       "text2": "",
       "moveNext": "BackgroundRight",
-      "poseNext": ""
+      "poseNext": "",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Green Gecko",
+      "speaker": "GreenGecko",
       "pose": "Pose2",
       "stage": "ForegroundLeft",
       "text1": "You're no fun.. Btw, where's Bear? Wasn't she coming with you?",
       "text2": "",
       "moveNext": "BackgroundLeft",
-      "poseNext": ""
+      "poseNext": "",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Bronze Bear",
-      "pose": "",
+      "speaker": "BronzeBear",
+      "pose": "Pose3",
       "stage": "ForegroundCenter",
       "text1": "NO WAY! THIS NEW APP ALLOWS YOU TO TELEPORT ANYWHERE YOU WANT!",
       "text2": "",
-      "moveNext": "",
-      "poseNext": ""
+      "moveNext": "BackgroundCenter",
+      "poseNext": "Pose2",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Purple Penguin",
-      "pose": "",
-      "stage": "",
+      "speaker": "PurplePenguin",
+      "pose": "Pose3",
+      "stage": "ForegroundRight",
       "text1": "LET'S USE IT TO GO TO THE MALL!",
       "text2": "",
-      "moveNext": "",
-      "poseNext": ""
+      "moveNext": "BackgroundRight",
+      "poseNext": "Pose2",
+      "alsoPose": "GreenGecko",
+      "otherPose": "Pose2"
     },
     {
-      "speaker": "Green Gecko",
-      "pose": "",
-      "stage": "",
+      "speaker": "GreenGecko",
+      "pose": "Pose3",
+      "stage": "ForegroundLeft",
       "text1": "Nah, I say let's use it to head to the surf shop..",
       "text2": "",
-      "moveNext": "",
-      "poseNext": ""
+      "moveNext": "BackgroundLeft",
+      "poseNext": "Pose1",
+      "alsoPose": "",
+      "otherPose": ""
     },
     {
-      "speaker": "Bronze Bear",
-      "pose": "",
-      "stage": "",
+      "speaker": "BronzeBear",
+      "pose": "Pose1",
+      "stage": "ForegroundCenter",
       "text1": "How about we enjoy our time here at the beach.",
       "text2": "",
       "moveNext": "",
-      "poseNext": ""
+      "poseNext": "",
+      "alsoPose": "",
+      "otherPose": ""
     }
   ]
 }

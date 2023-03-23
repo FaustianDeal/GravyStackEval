@@ -23,7 +23,7 @@ public class NPCDialog : MonoBehaviour
                 || staging == Staging.ForegroundCenter)
             {
                 // Flip the bubble for staging on the right or Center
-                Flip(ChatBubbles[0].gameObject);
+                //Flip(ChatBubbles[0].gameObject);
             }
             ChatBubbles[0].AddDialogText(false,textToDisplayPart1);
         }
