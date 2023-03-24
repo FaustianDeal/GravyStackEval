@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class TouchOrClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     public static event System.Action OnClickEvent;
 
+    private bool canClick = true;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (OnClickEvent != null)
+        if (canClick && OnClickEvent != null)
         {
             OnClickEvent();
+            canClick = false;
+            StartCoroutine(WaitForClick());
         }
     }
 
@@ -21,6 +26,12 @@ public class TouchOrClickHandler : MonoBehaviour, IPointerClickHandler, IPointer
     public void OnPointerUp(PointerEventData eventData)
     {
         //Debug.Log("Touched/Clicked Up!");
+    }
+
+    private IEnumerator WaitForClick()
+    {
+        yield return new WaitForSeconds(1f);
+        canClick = true;
     }
 }
 

@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     [SerializeField] private NPCDialog myDialog;
     private List<Sprite> CharacterSprites;
     [SerializeField] private Image currentImage;
+    public ImageFader myImageFader;
     private Staging CurrentStaging = Staging.ForegroundCenter;
     private readonly string folderPath = "Assets/Game Dev Test Assets";
 
@@ -56,5 +57,6 @@ public class Character : MonoBehaviour
                 //currentImage.rectTransform.sizeDelta = new Vector2(width, height);
             }
         }
+        myImageFader.FadeIn();
     }
 }

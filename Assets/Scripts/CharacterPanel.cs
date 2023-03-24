@@ -9,18 +9,21 @@ using UnityEngine.UI;
 
     public enum CharacterType   //What kind of character
     {
+        Failed = -1,
         BronzeBear,
         GreenGecko,
         PurplePenguin
     }
     public enum Pose    // What pose the character should use
     {
+        Failed = -1,
         Pose1,
         Pose2,
         Pose3
     }
     public enum Staging // Where a character will appear in the scene
     {
+        Failed = -1,
         ForegroundLeft,
         ForegroundLeft2,
         ForegroundCenter,
@@ -33,6 +36,8 @@ public class CharacterPanel : MonoBehaviour
 {
     public GameObject characterPrefab; // The character prefab that you want to place
     public DialogReader dialogReader;
+    public ImageFlasher flasher;
+    public LetterboxEffect letterBoxEffect;
     public float backgroundStagingScale = .75f;
     private Dictionary<Staging, Transform> characterPanelTransforms;
     private List<Character> SpawnedCharacters;
@@ -94,24 +99,33 @@ public class CharacterPanel : MonoBehaviour
     private void OnEnable()
     {
         TouchOrClickHandler.OnClickEvent += OnClick;
+        flasher.ImageFlashComplete += OnImageFlashComplete;
     }
 
     private void OnDisable()
     {
         TouchOrClickHandler.OnClickEvent -= OnClick;
+        flasher.ImageFlashComplete -= OnImageFlashComplete;
+    }
+
+    private void OnImageFlashComplete()
+    {
+        //AdvanceTheDialog();
     }
 
     private void AdvanceTheDialog()
     {
+        if (dialogProgressCounter >= dialogReader.dialogData.dialog.Length-1) return;
+        letterBoxEffect.ShowLetterbox();
         if (dialogProgressCounter > -1)
         {
-            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].moveNext))
+            if (dialogReader.dialogData.dialog[dialogProgressCounter].moveNext != Staging.Failed)
             {
-                if ((int)lastActiveCharacter > -1)
+                if (lastActiveCharacter != CharacterType.Failed)
                 {
                     foreach (Staging aStage in allStages)
                     {
-                        if (aStage.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].moveNext)
+                        if (aStage == dialogReader.dialogData.dialog[dialogProgressCounter].moveNext)
                         {
                             MoveCharacter(lastActiveCharacter,
                                 aStage);
@@ -120,13 +134,13 @@ public class CharacterPanel : MonoBehaviour
                 }
             }
 
-            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].poseNext))
+            if (dialogReader.dialogData.dialog[dialogProgressCounter].poseNext != Pose.Failed)
             {
-                if ((int)lastActiveCharacter > -1)
+                if (lastActiveCharacter != CharacterType.Failed)
                 {
                     foreach (Pose nextPose in allPoses)
                     {
-                        if (nextPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].poseNext)
+                        if (nextPose == dialogReader.dialogData.dialog[dialogProgressCounter].poseNext)
                         {
                             for (int i = 0; i < SpawnedCharacters.Count; i++)
                             {
@@ -140,16 +154,16 @@ public class CharacterPanel : MonoBehaviour
                 }
             }
 
-            if (!string.IsNullOrEmpty(dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose))
+            if (dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose != CharacterType.Failed)
             {
-                Debug.Log("Also pose: "+ dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose);
+                //Debug.Log("Also pose: "+ dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose);
                 for (int i = 0; i < SpawnedCharacters.Count; i++)
                 {
-                    if (SpawnedCharacters[i].myCharacterType.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose)
+                    if (SpawnedCharacters[i].myCharacterType == dialogReader.dialogData.dialog[dialogProgressCounter].alsoPose)
                     {
                         foreach (Pose nextPose in allPoses)
                         {
-                            if (nextPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].otherPose)
+                            if (nextPose == dialogReader.dialogData.dialog[dialogProgressCounter].otherPose)
                             {
                                 SpawnedCharacters[i].SetPose(nextPose);
                             }
@@ -168,7 +182,7 @@ public class CharacterPanel : MonoBehaviour
        
         foreach (CharacterType value in allCharacterTypes)
         {
-            if (value.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].speaker)
+            if (value == dialogReader.dialogData.dialog[dialogProgressCounter].speaker)
             {
                 speaker = value;
             }
@@ -176,7 +190,7 @@ public class CharacterPanel : MonoBehaviour
 
         foreach (Pose aPose in allPoses)
         {
-            if (aPose.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].pose)
+            if (aPose == dialogReader.dialogData.dialog[dialogProgressCounter].pose)
             {
                 speakingPose = aPose;
             }
@@ -184,7 +198,7 @@ public class CharacterPanel : MonoBehaviour
 
         foreach (Staging aStage in allStages)
         {
-            if (aStage.ToString() == dialogReader.dialogData.dialog[dialogProgressCounter].stage)
+            if (aStage == dialogReader.dialogData.dialog[dialogProgressCounter].stage)
             {
                 speakerStage = aStage;
             }
@@ -197,6 +211,10 @@ public class CharacterPanel : MonoBehaviour
         
         DoCharacterDialog(speaker,speakingPose,speakerStage,multiPartSpeech,text1,text2);
         lastActiveCharacter = speaker;
+        if (dialogReader.dialogData.dialog[dialogProgressCounter].imgFlash)
+        {
+            flasher.DoFlash();
+        }
     }
     
     /// <summary>

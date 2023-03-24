@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3067579030934395597}
   - component: {fileID: 3067579030934395595}
   - component: {fileID: 3067579030934395592}
+  - component: {fileID: 908650269609255264}
   m_Layer: 5
   m_Name: CharacterPrefab
   m_TagString: Untagged
@@ -139,6 +140,21 @@ MonoBehaviour:
   myCharacterType: 0
   myDialog: {fileID: 5429891596711057716}
   currentImage: {fileID: 7010141662302615559}
+  myImageFader: {fileID: 908650269609255264}
+--- !u!114 &908650269609255264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067579030934395596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81bd87ab3cda8a419d5ece4cd2781da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageToFade: {fileID: 7010141662302615559}
+  fadeDuration: 1
 --- !u!1001 &6121699768056382739
 PrefabInstance:
   m_ObjectHideFlags: 0

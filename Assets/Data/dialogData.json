@@ -1,5 +1,5 @@
 {
-  "dialog": [
+  "orDiaLine": [
     {
       "speaker": "PurplePenguin",
       "pose": "Pose1",
@@ -9,7 +9,8 @@
       "moveNext": "BackgroundRight",
       "poseNext": "Pose2",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "GreenGecko",
@@ -20,7 +21,8 @@
       "moveNext": "BackgroundLeft",
       "poseNext": "",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "PurplePenguin",
@@ -31,7 +33,8 @@
       "moveNext": "BackgroundRight",
       "poseNext": "",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "GreenGecko",
@@ -42,7 +45,8 @@
       "moveNext": "BackgroundLeft",
       "poseNext": "",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "BronzeBear",
@@ -53,7 +57,8 @@
       "moveNext": "BackgroundCenter",
       "poseNext": "Pose2",
       "alsoPose": "GreenGecko",
-      "otherPose": "Pose1"
+      "otherPose": "Pose1",
+      "imgFlash": true
     },
     {
       "speaker": "PurplePenguin",
@@ -64,7 +69,8 @@
       "moveNext": "BackgroundRight",
       "poseNext": "Pose2",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "GreenGecko",
@@ -75,7 +81,8 @@
       "moveNext": "BackgroundLeft",
       "poseNext": "Pose1",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     },
     {
       "speaker": "BronzeBear",
@@ -86,7 +93,8 @@
       "moveNext": "",
       "poseNext": "",
       "alsoPose": "",
-      "otherPose": ""
+      "otherPose": "",
+      "imgFlash": false
     }
   ]
 }
