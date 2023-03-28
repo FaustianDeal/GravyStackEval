@@ -54,6 +54,12 @@ public class Character : MonoBehaviour
             {
                 currentImage.sprite = CharacterSprites[i];
                 currentImage.SetNativeSize();
+                // Get a reference to the RectTransform component of the image object
+                RectTransform imageRectTransform = currentImage.GetComponent<RectTransform>();
+
+                // Modify the anchor point of the image
+                imageRectTransform.anchorMin = new Vector2(0.5f, 0.5f); // Set anchor point to center
+                imageRectTransform.anchorMax = new Vector2(0.5f, 0.5f); // Set anchor point to center
                 //currentImage.rectTransform.sizeDelta = new Vector2(width, height);
             }
         }
